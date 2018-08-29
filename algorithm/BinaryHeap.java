@@ -3,7 +3,7 @@ package algorithm;
 import java.util.*;
 
 //二叉堆（最大堆）
-//优先队列 PriorityQueue
+//优先队列（PriorityQueue）可通过二叉堆来实现
 public class BinaryHeap {
 	public List<Integer> heap;
 

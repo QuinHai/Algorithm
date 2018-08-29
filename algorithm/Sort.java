@@ -1,9 +1,5 @@
 package algorithm;
 
-import java.util.Arrays;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class Sort {
 	public static void Log(Object a) {
@@ -174,11 +170,41 @@ class Sort {
 		sort7(a, 0, a.length - 1);
 	}
 	
+	//堆排序
+	public static void sort8(int[] a){
+		int endIndex = a.length -1 ;
+		
+		for(int i = (endIndex-1)/ 2;i >= 0;i --){
+			Sink(a, i, endIndex);
+		}
+		while(endIndex > 0){
+			Exch(a, 0, endIndex--); 
+			Sink(a, 0, endIndex);
+		}
+	}
+	//下沉
+	public static void Sink(int[] a, int currentIndex, int endIndex){
+		int value = a[currentIndex];
+		
+		while(currentIndex < endIndex){
+			int childIndex = currentIndex*2 +1;
+			
+			if(childIndex > endIndex) break;
+			if(childIndex < endIndex)
+				childIndex += a[childIndex] < a[childIndex+1]?1:0;
+			if (value > a[childIndex]) break;
+			
+			a[currentIndex] = a[childIndex];
+			currentIndex = childIndex;
+		}
+		a[currentIndex] = value; 
+	}
+	
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis();
 
-		int[] a = { 8, 1,9, 1, 7, 2, 2, 5, 4, 6, 0 ,11, 25, 11 ,2, 6, 8,0,1}; // 测试数据
-		Sort.sort7(a);
+		int[] a = { 8, 1,9, 1, 7, 2, 2, 5, 4, 6,11, 32,1,0,243}; // 测试数据
+		Sort.sort8(a);
 		Sort.Log(a);
 
 		// 程序运行时间
