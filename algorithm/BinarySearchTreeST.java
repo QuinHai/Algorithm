@@ -86,8 +86,8 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements
 		if(null == node) return null;
 		
 		int cmp = key.compareTo(node.key);
-		if(cmp > 0) return delete(node.right, key);
-		else if(cmp < 0) return delete(node.left, key);
+		if(cmp > 0) node.right = delete(node.right, key);
+		else if(cmp < 0) node.left = delete(node.left, key);
 		else{
 			if(node.left == null) return node.right;
 			if(node.right == null) return node.left; //左右孩子不全，则直接补上
@@ -201,8 +201,8 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements
 		return max(root).key;
 	}
 	private Node max(Node node){
-		if(node.left == null) return node;
-		return max(node.left);
+		if(node.right == null) return node;
+		return max(node.right);
 	}
 
 	@Override
@@ -224,6 +224,26 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> implements
 		if(cmplo < 0) keys(node.left, list, lo, hi);
 		if(cmplo <= 0 && cmphi >= 0) list.add(node.key);
 		if(cmphi > 0) keys(node.right, list, lo, hi);
+	}
+	
+	public static void main(String[] args) {
+		BinarySearchTreeST<Integer, String> bstst = new BinarySearchTreeST<>();
+		
+		bstst.put(20, "Hello");
+		bstst.put(10, "World");
+		bstst.put(30, "!");
+		bstst.put(15, "My");
+		bstst.put(25, "Lady");
+		
+		System.out.println(bstst.get(15));
+		System.out.println(bstst.size());
+		System.out.println(bstst.delete(30));
+		System.out.println(bstst.get(25));
+		System.out.println(bstst.size());
+		
+		for(Iterator<Integer> i = bstst.keys();i.hasNext();){
+			System.out.println(i.next());
+		}
 	}
 
 }
