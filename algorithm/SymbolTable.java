@@ -2,6 +2,7 @@ package algorithm;
 
 import java.util.Iterator;
 
+//符号表
 public interface SymbolTable<Key, Value> {
 	public void put(Key key, Value value);
 	public Value get(Key key);

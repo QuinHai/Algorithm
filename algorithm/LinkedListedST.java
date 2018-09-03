@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+//无序符号表 
 public class LinkedListedST<Key, Value> implements SymbolTable<Key, Value> {
 	private int size;
 	private Node head;
@@ -22,12 +23,11 @@ public class LinkedListedST<Key, Value> implements SymbolTable<Key, Value> {
 
 	@Override
 	public void put(Key key, Value value) {
-		try {
-			if (value == null || key == null)
-				throw new Exception("Key or Value can not be null");
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(value == null) {
+			delete(key);
+			return;
 		}
+		
 		// 判断有无重复键值
 		for (Node node = head; node != null; node = node.next) {
 			if (key.equals(node.key)) {

@@ -1,5 +1,6 @@
 package algorithm;
 
+//完全二叉树
 public class BinaryTree {
 	private BinaryTree lc = null; // left child
 	private BinaryTree rc = null; // right child
